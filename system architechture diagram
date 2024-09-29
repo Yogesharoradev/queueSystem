@@ -1,0 +1,55 @@
+
+
+        #  diagram flow
+
+
+
+                        +-------------------+            +--------------+           +----------------+
+                        |  Client Interface | <------->  |    Server    | <-------->|   MongoDB       |
+                        +-------------------+            +--------------+           +----------------+
+                                |                             |                            |
+                                V                             V                            V
+                        +----------------+            +---------------------+        +----------------+
+                        |  Kafka Queue   | <--------> | Worker Processes     | <----->| Prometheus/Grafana|
+                        +----------------+            +---------------------+        +----------------+
+
+
+
+      #   Detailed Process Flow Diagram: "How Requests are Received, Authenticated, Queued, Processed, and Logged"
+                          
+                          
+                                            +-------------------+            +---------------+            +---------------------+
+                            |  User Request     |            |  Node.js API  |            | MongoDB (User Data) |
+                            +-------------------+            +---------------+            +---------------------+
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            1. User sends request          2. Verify JWT token               3. Retrieve user info
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            +---------------------+    +-------------------------+                 |
+                            |  JWT Authentication | -> |  User Authenticated     |----------------> V
+                            +---------------------+    +-------------------------+           Check role/permissions
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            4. Auth Success/Fail               5. Queue Request                    |
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            +---------------------+    +--------------------------+                |
+                            | Add to Kafka Queue  | -> |  Kafka Topic Created      |                |
+                            +---------------------+    +--------------------------+                |
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            6. Kafka Queues Requests            7. Worker Polls Queue
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            +---------------------+    +---------------------------+               |
+                            | Worker Process Task | -> |  Request Execution Success |               |
+                            +---------------------+    +---------------------------+               |
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            +---------------------+    +---------------------------+               |
+                            |  Log Result to DB   | -> |  Update Request Status     |               V
+                            +---------------------+    +---------------------------+          Log request status
+                                    |                           |                                 |
+                                    V                           |                                 |
+                            8. Send Response Back               9. Metrics Collection (Optional)
