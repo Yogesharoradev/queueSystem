@@ -16,12 +16,8 @@ This project aims to design and implement a backend system that efficiently mana
    - [User Authentication](#user-authentication)
    - [Request Queueing](#request-queueing)
    - [Worker Processes](#worker-processes)
-5. [Testing](#testing)
-6. [Deployment](#deployment)
-7. [Flow Diagrams](#flow-diagrams)
-8. [Logging and Monitoring](#logging-and-monitoring)
-9. [Contributing](#contributing)
-10. [License](#license)
+5. [Deployment](#deployment)
+
 
 ## Features
 
@@ -42,7 +38,7 @@ This project aims to design and implement a backend system that efficiently mana
 
 ## System Architecture
 
-![System Architecture Diagram](path/to/system-architecture-diagram.png)
+![System Architecture Diagram]
 
 The architecture includes:
 
@@ -64,10 +60,6 @@ Each client has a dedicated queue managed using a queueing system (RabbitMQ/Redi
 ### Worker Processes
 
 Worker processes listen for requests in the queue and execute them sequentially, ensuring that the requests are handled properly.
-
-## Testing
-
-- Unit tests are written to verify the functionality of the authentication, queue management, and request processing components.
 
 ## Deployment
 
