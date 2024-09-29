@@ -36,9 +36,8 @@ This project aims to design and implement a backend system that efficiently mana
 ## Technologies Used
 
 - **Programming Language**: Node.js
-- **Messaging/Queueing System**: RabbitMQ / Redis / Kafka
-- **Database**: PostgreSQL / MongoDB
-- **Monitoring Tools**: Prometheus, Grafana
+- **Messaging/Queueing System**: Kafka
+- **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
 
 ## System Architecture
